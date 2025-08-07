@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/unity-idm/unity:
+      branch: dev
+      repo: https://github.com/unity-idm/unity
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/unity-idm/unity git:
+        commands:
+        - /usr/bin/env sh .sqa/script.gamy-amethyst-squid.sh
+        container: qc.acc_wiggy-gamboge-rhinoceros
+  QC.Doc:
+    repos:
+      github.com/unity-idm/unity find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-pumpkin-drever.sh
+        container: qc.doc_smelly-blue-fowl
+      github.com/unity-idm/unity git:
+        commands:
+        - /usr/bin/env sh .sqa/script.skanky-cream-havanese.sh
+        container: qc.doc_droopy-zucchini-flounder
+      github.com/unity-idm/unity markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-black-rattlesnake.sh
+        container: qc.doc_shaggy-tangerine-iguana
+  QC.Lic:
+    repos:
+      github.com/unity-idm/unity licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-cornflower-monkey.sh
+        container: qc.lic_squirrely-lavender-shrew
+  QC.Sty:
+    repos:
+      github.com/unity-idm/unity checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.ugly-goldenrod-mouse.sh
+        container: qc.sty_dorky-salmon-barnacle
+      github.com/unity-idm/unity jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wiggy-azure-mongrel.sh
+        container: qc.sty_slimy-bistre-salamander
+  QC.Ver:
+    repos:
+      github.com/unity-idm/unity get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-wheat-caiman.sh
+        container: qc.ver_scanty-firebrick-bison
+timeout: 5400
